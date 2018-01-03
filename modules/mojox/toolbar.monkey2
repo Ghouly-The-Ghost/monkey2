@@ -21,11 +21,11 @@ Class ToolBar Extends DockingView
 
 	#rem monkeydoc Creates a new tool bar.
 	#end
-	Method New()
-		Self.New( std.geom.Axis.X )
+	Method New( flip:Bool=False )
+		Self.New( std.geom.Axis.X,flip )
 	End
 	
-	Method New( axis:Axis )
+	Method New( axis:Axis,flip:Bool=False)
 		Style=GetStyle( "ToolBar" )
 		
 		Layout=(axis=Axis.X ? "fill-x" Else "fill-y")
@@ -33,7 +33,8 @@ Class ToolBar Extends DockingView
 		Gravity=New Vec2f( 0,0 )
 		
 		_axis=axis
-		_add=axis=Axis.X ? "left" Else "top"
+		
+		_add=axis=Axis.X ? (flip? "right" Else "left") Else (flip? "bottom" Else "top")
 	End
 	
 	#rem monkeydoc Toolbar axis.
