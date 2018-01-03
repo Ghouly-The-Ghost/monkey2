@@ -24,7 +24,7 @@ Const DECL_ACCESSMASK:=DECL_PUBLIC|DECL_PRIVATE|DECL_PROTECTED|DECL_INTERNAL
 Class Decl Extends PNode
 
 	Field kind:String
-	Field ident:String
+	Field _ident:String
 	Field flags:Int
 	Field symbol:String
 	Field docs:String
@@ -90,6 +90,12 @@ Class Decl Extends PNode
 	
 	Property IsDefault:Bool()
 		Return (flags & DECL_DEFAULT)<>0
+	End
+	
+	Property ident:String()
+		Return _ident
+	Setter( value:String )
+		_ident=value.Replace(".","_DOT_")
 	End
 	
 	Method ToNode:SNode( scope:Scope ) Virtual
