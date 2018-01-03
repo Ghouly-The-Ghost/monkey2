@@ -95,7 +95,7 @@ Class Decl Extends PNode
 	Property ident:String()
 		Return _ident
 	Setter( value:String )
-		_ident=value.Replace(".","_DOT_")
+		_ident=value.Replace( ".","_DOT_" )
 	End
 	
 	Method ToNode:SNode( scope:Scope ) Virtual
