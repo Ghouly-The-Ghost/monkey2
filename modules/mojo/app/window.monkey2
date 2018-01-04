@@ -191,6 +191,12 @@ Class Window Extends View
 		SDL_RestoreWindow( _sdlWindow )
 	End
 	
+	#rem monkeydoc Forces the window to be cleared to its clear color.
+	#end
+	Method ClearWindow()
+		RenderWindow( False )
+	End
+	
 	'***** INTERNAL *****
 
 	#rem monkeydoc @hidden
@@ -199,7 +205,7 @@ Class Window Extends View
 	
 		LayoutWindow()
 		
-		If render RenderWindow()
+		RenderWindow( render )
 	End
 	
 	#rem monkeydoc @hidden Mouse scale for ios retina devices. Should prob. be in App so @2.png can use it etc.
@@ -436,7 +442,7 @@ Class Window Extends View
 	
 	#rem monkeydoc @hidden
 	#end
-	Method RenderWindow()
+	Method RenderWindow( render:Bool )
 		
 		If _maxfudge
 			_maxfudge-=1
@@ -467,7 +473,7 @@ Class Window Extends View
 		
 		If _clearEnabled _canvas.Clear( _clearColor )
 		
-		Render( _canvas )
+		If render Render( _canvas )
 		
 		_canvas.EndRender()
 		
