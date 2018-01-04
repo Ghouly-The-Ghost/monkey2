@@ -191,6 +191,34 @@ Class Window Extends View
 		SDL_RestoreWindow( _sdlWindow )
 	End
 	
+	#rem monkeydoc Forces a window to clear to its clear color.
+	#end
+	Method ClearWindow()
+		
+		SDL_GL_MakeCurrent( _sdlWindow,_sdlGLContext )
+
+		SDL_GL_SetSwapInterval( _swapInterval )
+	
+#If __TARGET__="windows"
+
+		If _weirdHack
+			_weirdHack=False
+			SDL_GL_SwapWindow( _sdlWindow )
+		Endif
+#Endif
+		Local bounds:=New Recti( 0,0,Frame.Size )
+		
+		_canvas.Resize( bounds.Size )
+		
+		_canvas.BeginRender( bounds,New AffineMat3f )
+		
+		If _clearEnabled _canvas.Clear( _clearColor )
+		
+		_canvas.EndRender()
+		
+		SDL_GL_SwapWindow( _sdlWindow )
+	End
+	
 	'***** INTERNAL *****
 
 	#rem monkeydoc @hidden
